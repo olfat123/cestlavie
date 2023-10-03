@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('tokens', function (Blueprint $table) {
             $table->id();
+            $table->string('token');
+            $table->bigInteger('country_id')->unsigned()->nullable();
+            $table->foreign('country_id')->references('id')->on('countries');
+            $table->timestamp('last_open_at');
             $table->timestamps();
         });
     }

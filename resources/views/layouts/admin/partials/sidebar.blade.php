@@ -19,25 +19,48 @@
             </li>
             
             
-            {{-- @if($authUser->can('view_dashboard'))
-                <li class="@if(request()->is('*admin/users*')) current_section @endif" title="Users">
-                    <a href="{{route('user.admin.index')}}">
-                        <span class="menu_icon"><i class="material-icons">group</i></span>
-                        <span class="menu_title">Customers</span>
+            @if($authUser->can('view_dashboard'))
+                <li class="@if(request()->is('*admin/configurations*')) current_section @endif" title="Configurations">
+                    <a href="{{route('config.manager.index')}}">
+                        <span class="menu_icon"><i class="material-icons">settings</i></span>
+                        <span class="menu_title">Configurations</span>
                     </a>
                 </li>
-            @endif --}}
-            {{-- @if($authUser->can('view_dashboard'))
-                
-                <li class="@if(request()->is('*admins*')) current_section @endif" >
-                    <a href="{{route('management.admin.user.index')}}">
-                        <span class="menu_icon"><i class="material-icons">security</i></span>
-                        <span class="menu_title">Managers</span>
-                    </a>
-                </li>
-            @endif --}}
-            
+            @endif
            
+            @if($authUser->can('view_dashboard'))               
+                <li class="@if(request()->is('*countries*')) current_section @endif" >
+                    <a href="{{route('country.manager.index')}}">
+                        <span class="menu_icon"><i class="material-icons">security</i></span>
+                        <span class="menu_title">Countries</span>
+                    </a>
+                </li>
+            @endif 
+            
+            @if($authUser->can('view_dashboard'))             
+                <li class="@if(request()->is('*manual-messages*')) current_section @endif" >
+                    <a href="{{route('manualMessage.manager.index')}}">
+                        <span class="menu_icon"><i class="material-icons">security</i></span>
+                        <span class="menu_title">Manual Messages</span>
+                    </a>
+                </li>
+            @endif
+            @if($authUser->can('view_dashboard'))             
+                <li class="@if(request()->is('*wmessages*')) current_section @endif" >
+                    <a href="{{route('wMessage.manager.index')}}">
+                        <span class="menu_icon"><i class="material-icons">security</i></span>
+                        <span class="menu_title">Weekly Messages</span>
+                    </a>
+                </li>
+            @endif
+            @if($authUser->can('view_dashboard'))             
+                <li class="@if(request()->is('*wverses*')) current_section @endif" >
+                    <a href="{{route('wVerse.manager.index')}}">
+                        <span class="menu_icon"><i class="material-icons">security</i></span>
+                        <span class="menu_title">Weekly Verses</span>
+                    </a>
+                </li>
+            @endif
         </ul>
     </div>
 </aside>

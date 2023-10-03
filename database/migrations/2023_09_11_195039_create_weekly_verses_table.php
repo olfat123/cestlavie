@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('weekly_verses', function (Blueprint $table) {
             $table->id();
+            $table->text('verse');
+            $table->bigInteger('country_id')->unsigned()->nullable();
+            $table->foreign('country_id')->references('id')->on('countries');
+            $table->timestamp('sent_at')->nullable();
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }

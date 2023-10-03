@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class WeeklyVerse extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+    protected $dates = ['sent_at'];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class , 'country_id');
+    }
 }

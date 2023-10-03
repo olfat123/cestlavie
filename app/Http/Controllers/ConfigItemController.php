@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class WeeklyVerseController extends Controller
+class ConfigItemController extends Controller
 {
     //
 }
