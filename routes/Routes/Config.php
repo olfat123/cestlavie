@@ -8,6 +8,8 @@ Route::group([
     'prefix' => 'admin/configurations',
     'as' => 'config.manager.',
     'namespace' => 'App\Http\Controllers',
+    'middleware' => 'manager_access',
+
 ], function () {
     Route::get('', [
         'as' => 'index',
@@ -30,6 +32,7 @@ Route::group([
     'prefix' => 'configurations',
     'as' => 'config.manager.',
     'namespace' => 'App\Http\Controllers',
+
 ], function (){
     Route::get('index' , [
         'as'=> 'apiIndex',
