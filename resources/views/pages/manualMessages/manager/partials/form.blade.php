@@ -23,13 +23,32 @@
                                 name="title"/>
                         @include("layouts.partials.form-errors",['field'=>"title"])
                     </div>
+                    <div class="uk-width-medium-1-1">
+                        <label for="country" class="uk-form-label">
+                            Country
+                        </label>
+                        <select id="country" name="country_id" data-md-selectize data-md-selectize-bottom class="text-capitalize">
+                            <option class="text-capitalize" value="0">All Countries</option>
+                            @foreach($countries as $country)
+                                <option class="text-capitalize" data-id="{{$country->id}}"
+                                        @if(isset($message) && $message->country_id == $country->id) selected
+                                        @endif
+                                        value="{{$country->id}}">{{$country->country}}</option>
+                            @endforeach
+                        </select>
+                        @include("layouts.partials.form-errors",['field'=>'country_id'])
+                    </div>
                 </div>
-
+                
                 <div class="uk-grid" data-uk-grid-margin>
                     <div class="uk-width-medium-1-1" >
-                        <label for="page_content">Body </label>
-                        <textarea class="no_autosize tinymce" name="message" id="page_content">@if(isset($message)){{$message->message}}@endif</textarea>                        
-                        @include("layouts.partials.form-errors",['field'=>"message"])
+                        <div class="md-input-wrapper md-input-filled">
+                            <label>Body </label>
+                            <textarea cols="30" rows="4" class="md-input" style="height: 192px; width: 568px;" name="message">@isset($message) {{$message->message}} @endisset</textarea>
+                            <span class="md-input-bar "></span>
+                            @include("layouts.partials.form-errors",['field'=>"message"])
+                        </div>
+                        
                     </div>
                 </div>               
             </div>
