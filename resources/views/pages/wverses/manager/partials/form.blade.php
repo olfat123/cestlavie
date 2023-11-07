@@ -4,7 +4,7 @@
         <div class="md-card">
             <div class="md-card-toolbar">
                 <h3 class="md-card-toolbar-heading-text">
-                    @if(isset($wVerses))
+                    @if(isset($wVerse))
                         Edit Verse
                     @else
                         Add New Verse
