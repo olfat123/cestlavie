@@ -4,7 +4,7 @@
 @section('d-content')
     <form action="{{route('wVerse.manager.store')}}" method="POST" class="ajax" id="couponStore"
           enctype="multipart/form-data">
-        @include('pages.wVerses.manager.partials.form',['submit_button'=>'Create'])
+        @include('pages.wverses.manager.partials.form',['submit_button'=>'Create'])
     </form>
 @endsection
 @section('d-scripts')

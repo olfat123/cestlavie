@@ -6,7 +6,7 @@
           enctype="multipart/form-data">
         @method('PATCH')
         <input type="hidden" name="redirect_to" value="{{url()->previous()}}">
-        @include('pages.wVerses.manager.partials.form',['submit_button'=>'Update'])
+        @include('pages.wverses.manager.partials.form',['submit_button'=>'Update'])
     </form>
 @endsection
 @section('d-scripts')
