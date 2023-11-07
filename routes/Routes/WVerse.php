@@ -8,6 +8,7 @@ Route::group([
     'as' => 'wVerse.manager.',
     'namespace' => 'App\Http\Controllers',
     'middleware' => 'manager_access',
+    
 ], function () {
 
     Route::get('/', [
