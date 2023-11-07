@@ -47,7 +47,7 @@
                         </thead>
                         <tbody>
                         @foreach($wVerses as $wVerse)
-                            @include('pages.wVerses.manager.partials.info')
+                            @include('pages.wverses.manager.partials.info')
                         @endforeach
                         </tbody>
                     </table>
