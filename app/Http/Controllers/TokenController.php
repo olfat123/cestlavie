@@ -49,8 +49,14 @@ class TokenController extends Controller
         if(!$country){
            $country = Country::create(['country'=> $request->country]); 
         }
+
         $data['country_id'] = $country->id;
-        $token = Token::create($data);
+        $token = Token::firstWhere('token',$request->token);
+        if(!$token){
+            $token = Token::create($data);
+        }else{
+            $token::update(['last_open_at'=>now()]);
+        }
         
         return $this->returnCrudData(__('system_messages.common.create_success'), '');
     }

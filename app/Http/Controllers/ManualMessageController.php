@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use ExpoSDK\Expo;
+use App\Models\Token;
 use App\Models\Country;
+use ExpoSDK\ExpoMessage;
 use Illuminate\Http\Request;
 use App\Models\ManualMessage;
 use App\Presenters\CommonPresenter;
@@ -59,8 +62,29 @@ class ManualMessageController extends Controller
     public function store(Request $request)
     {
         $message = ManualMessage::create($request->except('cover'));
-        
-        return $this->returnCrudData(__('system_messages.common.create_success'), route('manualMessage.manager.index'));
+        $expo = Expo::driver('file');
+        $channel = 'news-letter';
+        $tokens = Token::where('country_id',$message->country_id)->pluck('token');
+        $expo->subscribe($channel, $tokens);
+
+        /**
+         * Create messages fluently and/or pass attributes to the constructor
+         */
+        $message_to_send = (new ExpoMessage([
+            'title' => $message->title,
+            'body' => $message->message,
+        ]))
+            ->setData(['id' => 1])
+            ->setChannelId('default')
+            ->setBadge(0)
+            ->playSound();
+
+        $response = $expo->send($message_to_send)->toChannel($channel)->push();
+
+        // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
+        $data = $response->getData();
+        $message::update(['sent_at'=>now()]);
+        return $this->returnCrudData('msg',null,'success',$data);
     }
 
     /**
