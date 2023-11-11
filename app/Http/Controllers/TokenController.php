@@ -55,7 +55,7 @@ class TokenController extends Controller
         if(!$token){
             $token = Token::create($data);
         }else{
-            $token::update(['last_open_at'=>now()]);
+            $token->update(['last_open_at'=>now()]);
         }
         
         return $this->returnCrudData(__('system_messages.common.create_success'), '');
