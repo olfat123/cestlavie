@@ -84,7 +84,7 @@ class ManualMessageController extends Controller
 
         // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
         $data = $response->getData();
-        $message::update(['sent_at'=>now()]);
+        $message->update(['sent_at'=>now()]);
         return $this->returnCrudData('Added successfully',null,'success',$data);
     }
 
