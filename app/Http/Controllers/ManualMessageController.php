@@ -66,26 +66,28 @@ class ManualMessageController extends Controller
         $channel = 'news-letter';
         $tokens = Token::where('country_id',$message->country_id)->pluck('token')->toArray();
         //dd($tokens);
-        $expo->subscribe($channel, $tokens);
+        if($tokens){
+            $expo->subscribe($channel, $tokens);
 
-        /**
-         * Create messages fluently and/or pass attributes to the constructor
-         */
-        $message_to_send = (new ExpoMessage([
-            'title' => $message->title,
-            'body' => $message->message,
-        ]))
-            ->setData(['id' => 1])
-            ->setChannelId('default')
-            ->setBadge(0)
-            ->playSound();
+            /**
+             * Create messages fluently and/or pass attributes to the constructor
+             */
+            $message_to_send = (new ExpoMessage([
+                'title' => $message->title,
+                'body' => $message->message,
+            ]))
+                ->setData(['id' => 1])
+                ->setChannelId('default')
+                ->setBadge(0)
+                ->playSound();
 
-        $response = $expo->send($message_to_send)->toChannel($channel)->push();
+            $response = $expo->send($message_to_send)->toChannel($channel)->push();
 
-        // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
-        $data = $response->getData();
-        $message->update(['sent_at'=>now()]);
-        return $this->returnCrudData('Added successfully',null,'success',$data);
+            // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
+            $data = $response->getData();
+            $message->update(['sent_at'=>now()]);
+        }
+        return $this->returnCrudData('Added successfully',null,'success');
     }
 
     /**
