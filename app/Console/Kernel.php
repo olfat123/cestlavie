@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Jobs\SendWeeklyMessage;
+use App\Jobs\SendWeeklyVerse;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,8 +17,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $this->weekly($schedule);
         // $schedule->command('inspire')->hourly();
     }
+
+    protected function weekly($schedule)
+    {
+        $schedule->job(new SendWeeklyMessage())->weekly();
+        $schedule->job(new SendWeeklyVerse())->weekly();
+    }
+
 
     /**
      * Register the commands for the application.
