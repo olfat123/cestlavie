@@ -18,15 +18,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $this->weekly($schedule);
-        $schedule->job(new SendWeeklyMessage())->everyMinute();
-        $schedule->job(new SendWeeklyVerse())->everyMinute();
         // $schedule->command('inspire')->hourly();
     }
 
     protected function weekly($schedule)
     {
-        $schedule->job(new SendWeeklyMessage())->hourly();
-        $schedule->job(new SendWeeklyVerse())->hourly();
+        $schedule->job(new SendWeeklyMessage())->weekly();
+        $schedule->job(new SendWeeklyVerse())->weekly();
     }
 
 
