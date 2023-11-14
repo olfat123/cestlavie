@@ -2,10 +2,10 @@
 @section('title','Countries')
 @section('d-buttons')
     {{-- @can('add_coupons') --}}
-    <a href="{{route('country.manager.create')}}"
+    {{-- <a href="{{route('country.manager.create')}}"
        class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light uk-float-right">
         Add New Country
-    </a>
+    </a> --}}
     {{-- @endcan --}}
 @endsection
 @section('d-content')
@@ -41,7 +41,7 @@
                         <thead>
                         <tr>
                             <th>Country Name</th>
-                            <th class="uk-width-3-10 uk-text-center">Actions</th>
+                            {{-- <th class="uk-width-3-10 uk-text-center">Actions</th> --}}
                         </tr>
                         </thead>
                         <tbody>
