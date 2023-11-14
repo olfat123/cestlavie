@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
     {
         $this->weekly($schedule);
         $schedule->job(new SendWeeklyMessage())->everyMinute();
+        $schedule->job(new SendWeeklyVerse())->everyMinute();
         // $schedule->command('inspire')->hourly();
     }
 
