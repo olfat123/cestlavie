@@ -48,27 +48,29 @@ class HomeController extends Controller
         $channel = 'weekly-message';
         foreach($countries as $country){
             $message = WeeklyMessage::query()->where('country_id',$country)->whereNotNull('sent_at')->first();
-            $tokens = Token::where('country_id',$country)->pluck('token')->toArray();
-            if($tokens){
-                $expo->subscribe($channel, $tokens);
-    
-                /**
-                 * Create messages fluently and/or pass attributes to the constructor
-                 */
-                $message_to_send = (new ExpoMessage([
-                    'title' => $message->title,
-                    'body' => $message->message,
-                ]))
-                    ->setData(['id' => 1])
-                    ->setChannelId('default')
-                    ->setBadge(0)
-                    ->playSound();
-    
-                $response = $expo->send($message_to_send)->toChannel($channel)->push();
-    
-                // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
-                $data = $response->getData();
-                $message->update(['sent_at'=>now()]);
+            if($message){
+                $tokens = Token::where('country_id',$country)->pluck('token')->toArray();
+                if($tokens){
+                    $expo->subscribe($channel, $tokens);
+        
+                    /**
+                     * Create messages fluently and/or pass attributes to the constructor
+                     */
+                    $message_to_send = (new ExpoMessage([
+                        'title' => $message->title,
+                        'body' => $message->message,
+                    ]))
+                        ->setData(['id' => 1])
+                        ->setChannelId('default')
+                        ->setBadge(0)
+                        ->playSound();
+        
+                    $response = $expo->send($message_to_send)->toChannel($channel)->push();
+        
+                    // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
+                    $data = $response->getData();
+                    $message->update(['sent_at'=>now()]);
+                }
             }
         }
     }   
