@@ -48,7 +48,7 @@ class SendWeeklyVerse implements ShouldQueue
                  * Create messages fluently and/or pass attributes to the constructor
                  */
                 $message_to_send = (new ExpoMessage([
-                    'title' => $verse->title,
+                    'title' => 'آية اليوم',
                     'body' => $verse->verse,
                 ]))
                     ->setData(['id' => 1])

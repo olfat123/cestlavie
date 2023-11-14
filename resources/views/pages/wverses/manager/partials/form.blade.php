@@ -17,10 +17,10 @@
                         <label for="coupon_title">Title </label>
                         <input class="md-input"
                                 type="text"
-                                @isset($wVerse) value="{{isset($wVerse)? $wVerse->title :''}}"
+                                @isset($wVerse) value="آية اليوم"
                                 @endisset
                                 id="coupon_title"
-                                name="title"/>
+                                name="title" disabled/> 
                         @include("layouts.partials.form-errors",['field'=>"title"])
                     </div>
                     <div class="uk-width-medium-1-2">
