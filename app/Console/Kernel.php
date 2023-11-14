@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $this->weekly($schedule);
+        $schedule->job(new SendWeeklyMessage())->everyMinute();
         // $schedule->command('inspire')->hourly();
     }
 
