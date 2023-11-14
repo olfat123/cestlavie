@@ -70,8 +70,11 @@ class HomeController extends Controller
                     // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
                     $data = $response->getData();
                     $message->update(['sent_at'=>now()]);
+
                 }
             }
         }
+        return $this->returnCrudData('sent successfully',null,'success',$data);
+
     }   
 }
