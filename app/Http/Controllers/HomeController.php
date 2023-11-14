@@ -47,7 +47,8 @@ class HomeController extends Controller
         $expo = Expo::driver('file');
         $channel = 'weekly-message';
         foreach($countries as $country){
-            $message = WeeklyMessage::query()->where('country_id',$country)->whereNotNull('sent_at')->first();
+            $message = WeeklyMessage::query()->where('country_id',$country)->whereNull('sent_at')->first();
+
             if($message){
                 $tokens = Token::where('country_id',$country)->pluck('token')->toArray();
                 if($tokens){
