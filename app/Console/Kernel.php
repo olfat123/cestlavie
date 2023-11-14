@@ -23,8 +23,8 @@ class Kernel extends ConsoleKernel
 
     protected function weekly($schedule)
     {
-        $schedule->job(new SendWeeklyMessage())->daily();
-        $schedule->job(new SendWeeklyVerse())->daily();
+        $schedule->job(new SendWeeklyMessage())->hourly();
+        $schedule->job(new SendWeeklyVerse())->hourly();
     }
 
 
