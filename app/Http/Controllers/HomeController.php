@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use ExpoSDK\Expo;
 use App\Models\User;
 use App\Models\Token;
-use App\Models\WeeklyMessage;
-use Illuminate\Http\Request;
+use App\Models\Country;
 use ExpoSDK\ExpoMessage;
-use ExpoSDK\Expo;
+use Illuminate\Http\Request;
+use App\Models\WeeklyMessage;
 
 
 /**
@@ -42,33 +43,33 @@ class HomeController extends Controller
     }
 
     public function testpn(){
-        $wmessage = WeeklyMessage::first();
+        $countries = Country::query()->pluck('id')->toArray();
         $expo = Expo::driver('file');
-        $channel = 'news-letter';
-        $recipients = [
-            'ExponentPushToken[eAdfsx-WnGA:APA91bG1f2VhcHlCOG_7tzxwXOUxCljRf-6ex9SYO8rmAubkEu7m7QzTKpxGVXZWrSLrrHrrwBmXOHxuImp5I3ubR9-iyUf7CDcfgU_xQlgHHj_5OrBPO-Ixi8CIaQWRa-_SOVjYhSkT]',
-        ];
-        $expo->subscribe($channel, $recipients);
-
-        /**
-         * Create messages fluently and/or pass attributes to the constructor
-         */
-        $message = (new ExpoMessage([
-            'title' => 'initial title',
-            'body' => 'initial body',
-        ]))
-            ->setTitle('This title overrides initial title')
-            ->setBody('This notification body overrides initial body')
-            ->setData(['id' => 1])
-            ->setChannelId('default')
-            ->setBadge(0)
-            ->playSound();
-
-        $response = $expo->send($message)->toChannel($channel)->push();
-
-        // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
-        $data = $response->getData();
-        return $this->returnCrudData('msg',null,'success',$data);
-
+        $channel = 'weekly-message';
+        foreach($countries as $country){
+            $message = WeeklyMessage::query()->where('country_id',$country)->whereNotNull('sent_at')->first();
+            $tokens = Token::where('country_id',$country)->pluck('token')->toArray();
+            if($tokens){
+                $expo->subscribe($channel, $tokens);
+    
+                /**
+                 * Create messages fluently and/or pass attributes to the constructor
+                 */
+                $message_to_send = (new ExpoMessage([
+                    'title' => $message->title,
+                    'body' => $message->message,
+                ]))
+                    ->setData(['id' => 1])
+                    ->setChannelId('default')
+                    ->setBadge(0)
+                    ->playSound();
+    
+                $response = $expo->send($message_to_send)->toChannel($channel)->push();
+    
+                // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
+                $data = $response->getData();
+                $message->update(['sent_at'=>now()]);
+            }
+        }
     }   
 }
