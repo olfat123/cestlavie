@@ -74,7 +74,7 @@ class HomeController extends Controller
                 }
             }
         }
-        return $this->returnCrudData('sent successfully',null,'success',$data);
+        return $this->returnCrudData('sent successfully',null,'success');
 
     }   
 }
