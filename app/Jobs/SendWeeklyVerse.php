@@ -51,6 +51,7 @@ class SendWeeklyVerse implements ShouldQueue
                     $message_to_send = (new ExpoMessage([
                         'title' => 'آية اليوم',
                         'body' => $verse->verse,
+                        'icon' => asset('cestlavie.jpeg')
                     ]))
                         ->setData(['id' => 1])
                         ->setChannelId('default')

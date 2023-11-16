@@ -75,6 +75,7 @@ class ManualMessageController extends Controller
             $message_to_send = (new ExpoMessage([
                 'title' => $message->title,
                 'body' => $message->message,
+                'icon' => asset('cestlavie.jpeg')
             ]))
                 ->setData(['id' => 1])
                 ->setChannelId('default')

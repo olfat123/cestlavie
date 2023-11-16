@@ -4,7 +4,7 @@
             {{$item->title}}
         </h3>
     </div>
-    <div class="uk-form-row mb-20">
+    <div class="uk-form-row m-20">
         <label for="title" class="uk-form-label">
             Title
         </label>
@@ -15,7 +15,7 @@
             name="config[{{$configuration->id}}][items][title]"/>
     </div>
 
-    <div class="uk-form-row mb-20">
+    <div class="uk-form-row m-20">
         <label for="rightIcon" class="uk-form-label">
             Right Icon
         </label>
@@ -26,7 +26,7 @@
             name="config[{{$configuration->id}}][items][rightIcon]"/>
     </div>
 
-    <div class="uk-form-row mb-20">
+    <div class="uk-form-row m-20">
         <label for="leftIcon" class="uk-form-label">
             LeftIcon
         </label>
@@ -37,7 +37,7 @@
             name="config[{{$configuration->id}}][items][leftIcon]"/>
     </div>
 
-    <div class="uk-form-row mb-20">
+    <div class="uk-form-row m-20">
         <label for="color" class="uk-form-label">
             Color
         </label>
@@ -48,7 +48,7 @@
             name="config[{{$configuration->id}}][items][color]"/>
     </div>
 
-    <div class="uk-form-row mb-20">
+    <div class="uk-form-row m-20">
         <label for="url" class="uk-form-label">
             Url
         </label>

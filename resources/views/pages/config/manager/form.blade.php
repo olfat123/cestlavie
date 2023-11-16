@@ -24,3 +24,4 @@
     <input type="hidden" name="config[{{$configuration->id}}][items][id]" value="{{$item->id}}">
     @include('pages.config.manager.item')   
 @endforeach
+<hr style="width: 70%; margin: auto; padding: 20px 0px; margin-top: 30px; border-top: 5px solid #14b2ba;" />
