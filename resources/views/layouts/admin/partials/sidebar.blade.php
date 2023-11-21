@@ -27,6 +27,15 @@
                     </a>
                 </li>
             @endif
+
+            @if($authUser->can('view_dashboard'))
+                <li class="@if(request()->is('*admin/settings*')) current_section @endif" title="Settings">
+                    <a href="{{route('setting.manager.index')}}">
+                        <span class="menu_icon"><i class="material-icons">settings</i></span>
+                        <span class="menu_title">Settings</span>
+                    </a>
+                </li>
+            @endif
            
             @if($authUser->can('view_dashboard'))               
                 <li class="@if(request()->is('*countries*')) current_section @endif" >
