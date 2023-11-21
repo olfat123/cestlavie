@@ -4,7 +4,7 @@
     {{-- @can('add_coupons') --}}
     <a href="{{route('setting.manager.create')}}"
        class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light uk-float-right">
-        Add New Message
+        Add New Setting
     </a>
     {{-- @endcan --}}
 @endsection

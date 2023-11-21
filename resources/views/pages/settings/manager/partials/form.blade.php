@@ -15,9 +15,9 @@
                 <div class="uk-grid" data-uk-grid-margin>
                     <div class="uk-width-medium-1-2" >
                         <label for="coupon_title">Title </label>
-                        <input class="md-input" disabled
+                        <input class="md-input" 
                                 type="text"
-                                @isset($setting) value="{{isset($setting)? $setting->key :''}}"
+                                @isset($setting) value="{{isset($setting)? $setting->key :''}}" disabled
                                 @endisset
                                 id="coupon_title"
                                 name="key"/>
