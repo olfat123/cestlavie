@@ -79,7 +79,6 @@ class ManualMessageController extends Controller
             ]))
                 ->setData(['id' => 1])
                 ->setChannelId('default')
-                ->setBadge(0)
                 ->playSound();
 
             $response = $expo->send($message_to_send)->toChannel($channel)->push();
