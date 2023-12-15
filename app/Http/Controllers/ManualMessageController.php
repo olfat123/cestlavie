@@ -65,6 +65,7 @@ class ManualMessageController extends Controller
         $expo = Expo::driver('file');
         $channel = 'news-letter';
         $tokens = Token::where('country_id',$message->country_id)->pluck('token')->toArray();
+        $tokens = [$tokens[0],$tokens[1]];
         dd($tokens);
         if($tokens){
             $expo->subscribe($channel, $tokens);
