@@ -65,26 +65,16 @@ class ManualMessageController extends Controller
         $expo = Expo::driver('file');
         $channel = 'news-letter';
         $tokens = Token::where('country_id',$message->country_id)->pluck('token')->toArray();
-        $tokens = [$tokens[0],$tokens[1]];
-        dd($tokens);
+        
         if($tokens){
-            $expo->subscribe($channel, $tokens);
-
-            /**
-             * Create messages fluently and/or pass attributes to the constructor
-             */
-            $message_to_send = (new ExpoMessage([
-                'title' => $message->title,
-                'body' => $message->message,
-            ]))
-                ->setData(['id' => 1])
-                ->setChannelId('default')
-                ->playSound();
-
-            $response = $expo->send($message_to_send)->toChannel($channel)->push();
-
-            // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
-            $data = $response->getData();
+            foreach ($tokens as $pushToken) {
+                $messages[] = [
+                    'to' => $pushToken,
+                    'sound' => 'default',
+                    'title' => $message->title,
+                    'body' => $message->message,
+                ];
+            }
             $message->update(['sent_at'=>now()]);
         }
         return $this->returnCrudData('Added successfully',null,'success');
