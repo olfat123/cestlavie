@@ -79,13 +79,13 @@ class ManualMessageController extends Controller
                 ->setData(['id' => 1])
                 ->setChannelId('default')
                 ->playSound();
-                
+
             (new Expo)->send($message_to_send)->to($tokens)->push();
 
-            $response = $expo->send($message_to_send)->toChannel($channel)->push();
+            //$response = $expo->send($message_to_send)->toChannel($channel)->push();
 
             // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
-            $data = $response->getData();
+            //$data = $response->getData();
             $message->update(['sent_at'=>now()]);
         }
         return $this->returnCrudData('Added successfully',null,'success');
