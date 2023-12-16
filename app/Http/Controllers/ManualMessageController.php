@@ -67,14 +67,25 @@ class ManualMessageController extends Controller
         $tokens = Token::where('country_id',$message->country_id)->pluck('token')->toArray();
         
         if($tokens){
-            foreach ($tokens as $pushToken) {
-                $messages[] = [
-                    'to' => $pushToken,
-                    'sound' => 'default',
-                    'title' => $message->title,
-                    'body' => $message->message,
-                ];
-            }
+            //$expo->subscribe($channel, $tokens);
+
+            /**
+             * Create messages fluently and/or pass attributes to the constructor
+             */
+            $message_to_send = (new ExpoMessage([
+                'title' => $message->title,
+                'body' => $message->message,
+            ]))
+                ->setData(['id' => 1])
+                ->setChannelId('default')
+                ->playSound();
+                
+            (new Expo)->send($message_to_send)->to($tokens)->push();
+
+            $response = $expo->send($message_to_send)->toChannel($channel)->push();
+
+            // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
+            $data = $response->getData();
             $message->update(['sent_at'=>now()]);
         }
         return $this->returnCrudData('Added successfully',null,'success');
