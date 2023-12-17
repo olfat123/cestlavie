@@ -80,9 +80,9 @@ class ManualMessageController extends Controller
                 ->setChannelId('default')
                 ->playSound();
 
-            (new Expo)->send($message_to_send)->to($tokens)->push();
+           // (new Expo)->send($message_to_send)->to($tokens)->push();
 
-            //$response = $expo->send($message_to_send)->toChannel($channel)->push();
+            $response = $expo->send($message_to_send)->to($tokens)->push();
 
             // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
             //$data = $response->getData();
