@@ -108,7 +108,7 @@ class WMessageController extends Controller
     {
         $wMessage = WeeklyMessage::findOrFail($wMessage);
         $wMessage->update([
-            'message' => $request->wMessage
+            'message' => $request->message
         ]);
         
         return $this->returnCrudData(__('system_messages.common.update_success'), $request->redirect_to);
