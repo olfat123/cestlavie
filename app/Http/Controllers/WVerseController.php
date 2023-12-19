@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Country;
 use App\Models\WeeklyVerse;
 use Illuminate\Http\Request;
 use App\Presenters\CommonPresenter;
 use App\Http\Controllers\Traits\Filtration;
-use App\Models\Country;
 
 class WVerseController extends Controller
 {
@@ -40,6 +41,8 @@ class WVerseController extends Controller
     {
         return view('pages.wverses.manager.add', [
             'countries' => Country::all(),
+            'days' => Carbon::getDays(),
+            'hours' => $this->hoursList(), 
             'breadcrumb' => $this->breadcrumb([
                 [
                     'title' => 'Verses',
@@ -83,6 +86,8 @@ class WVerseController extends Controller
         return view('pages.wverses.manager.edit', [
             'wVerse' => $wVerse,
             'countries' => Country::all(),
+            'days' => Carbon::getDays(),
+            'hours' => $this->hoursList(), 
             'breadcrumb' => $this->breadcrumb([
                 [
                     'title' => 'Countries',

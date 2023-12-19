@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreign('country_id')->references('id')->on('countries');
             $table->timestamp('sent_at')->nullable();
             $table->integer('order')->default(0);
+            $table->string('day_to_send')->nullable();
+            $table->integer('hour_to_send')->nullable();
             $table->timestamps();
         });
     }

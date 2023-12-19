@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Controller extends BaseController
 {
@@ -50,5 +51,23 @@ class Controller extends BaseController
     protected function filterQueryStrings()
     {
         return array_filter(request()->query());
+    }
+
+    protected function hoursList()
+    {
+        $startOfDay = Carbon::now()->startOfDay();
+
+        // Create a Carbon instance for the end of the day
+        $endOfDay = Carbon::now()->endOfDay();
+
+        // Generate an array of hours in the day
+        $hoursList = [];
+
+        // Loop through the hours of the day and populate the array
+        for ($hour = clone $startOfDay; $hour <= $endOfDay; $hour->addHour()) {
+            $hoursList[] = $hour->format('H'); // Format the hour (24-hour format with minutes)
+        }
+
+        return $hoursList;
     }
 }

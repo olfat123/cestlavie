@@ -38,6 +38,36 @@
                         </select>
                         @include("layouts.partials.form-errors",['field'=>'country_id'])
                     </div>
+                    <div class="uk-width-medium-1-2">
+                        <label for="day" class="uk-form-label">
+                            Day to send
+                        </label>
+                        <select id="day" name="day_to_send" data-md-selectize data-md-selectize-bottom class="text-capitalize">
+                            <option class="text-capitalize" value="0">All Days</option>
+                            @foreach($days as $day)
+                                <option class="text-capitalize" data-id="{{$day}}"
+                                        @if(isset($wMessage) && $wMessage->day_to_send == $day) selected
+                                        @endif
+                                        value="{{$day}}">{{$day}}</option>
+                            @endforeach
+                        </select>
+                        @include("layouts.partials.form-errors",['field'=>'day_to_send'])
+                    </div>
+                    <div class="uk-width-medium-1-2">
+                        <label for="hour" class="uk-form-label">
+                            Hour to send
+                        </label>
+                        <select id="hour" name="hour_to_send" data-md-selectize data-md-selectize-bottom class="text-capitalize">
+                            <option class="text-capitalize" value="0">All Hours</option>
+                            @foreach($hours as $hour)
+                                <option class="text-capitalize" data-id="{{$hour}}"
+                                        @if(isset($wMessage) && $wMessage->hour_to_send == $hour) selected
+                                        @endif
+                                        value="{{$hour}}">{{$hour}}</option>
+                            @endforeach
+                        </select>
+                        @include("layouts.partials.form-errors",['field'=>'hour_to_send'])
+                    </div>
                     @isset($wMessage)
                         <div class="uk-width-medium-1-2" >
                             <label for="order">Order </label>

@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use WMessage;
 use ExpoSDK\Expo;
+use Carbon\Carbon;
 use App\Models\Token;
 use App\Models\Country;
 use ExpoSDK\ExpoMessage;
@@ -41,35 +42,38 @@ class SendWeeklyMessage implements ShouldQueue
         $channel = 'weekly-message';
         foreach($countries as $country){
             $message = WeeklyMessage::query()->where('country_id',$country)->whereNull('sent_at')->first();
-
             if($message){
-                $tokens = Token::where('country_id',$country)->pluck('token')->toArray();
-                if($tokens){
-                    $expo->subscribe($channel, $tokens);
-        
-                    /**
-                     * Create messages fluently and/or pass attributes to the constructor
-                     */
-                    $message_to_send = (new ExpoMessage([
-                        'title' => $message->title,
-                        'body' => $message->message,
-                        'icon' => asset('cestlavie.jpeg')
-                    ]))
-                        ->setData(['id' => 1])
-                        ->setChannelId('default')
-                        ->setBadge(0)
-                        ->playSound();
-        
-                    //$response = $expo->send($message_to_send)->toChannel($channel)->push();
-                    (new Expo)->send($message_to_send)->to($tokens)->push();
+                $currentDayName = Carbon::now()->format('l');
+                $currentHour = Carbon::now()->format('H');
+                if($message->day_to_send == $currentDayName 
+                    && $message->hour_to_send <= $currentHour){
+                    $tokens = Token::where('country_id',$country)->pluck('token')->toArray();
+                    if($tokens){
+                        $expo->subscribe($channel, $tokens);
+            
+                        /**
+                         * Create messages fluently and/or pass attributes to the constructor
+                         */
+                        $message_to_send = (new ExpoMessage([
+                            'title' => $message->title,
+                            'body' => $message->message,
+                            'icon' => asset('cestlavie.jpeg')
+                        ]))
+                            ->setData(['id' => 1])
+                            ->setChannelId('default')
+                            ->setBadge(0)
+                            ->playSound();
+            
+                        //$response = $expo->send($message_to_send)->toChannel($channel)->push();
+                        (new Expo)->send($message_to_send)->to($tokens)->push();
 
-                    // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
-                    //$data = $response->getData();
-                    $message->update(['sent_at'=>now()]);
+                        // $response = (new Expo)->send($message)->to($defaultRecipients)->push();
+                        //$data = $response->getData();
+                        $message->update(['sent_at'=>now()]);
 
+                    }
                 }
             }
-        }
-        
+        }       
     }
 }

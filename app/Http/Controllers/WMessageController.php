@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Models\WeeklyMessage;
@@ -40,6 +41,8 @@ class WMessageController extends Controller
     {
         return view('pages.wMessages.manager.add', [
             'countries' => Country::all(),
+            'days' => Carbon::getDays(),
+            'hours' => $this->hoursList(),     
             'breadcrumb' => $this->breadcrumb([
                 [
                     'title' => 'Messages',
@@ -82,7 +85,9 @@ class WMessageController extends Controller
         $wMessage = WeeklyMessage::findOrFail($wMessage);
         return view('pages.wMessages.manager.edit', [
             'wMessage' => $wMessage,   
-            'countries' => Country::all(),        
+            'countries' => Country::all(),  
+            'days' => Carbon::getDays(), 
+            'hours' => $this->hoursList(),     
             'breadcrumb' => $this->breadcrumb([
                 [
                     'title' => 'Messages',
