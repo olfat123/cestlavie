@@ -41,6 +41,7 @@
                         <thead>
                         <tr>
                             <th>Country Name</th>
+                            <th>Count</th>
                             {{-- <th class="uk-width-3-10 uk-text-center">Actions</th> --}}
                         </tr>
                         </thead>

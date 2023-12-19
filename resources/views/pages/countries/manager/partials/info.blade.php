@@ -1,5 +1,6 @@
 <tr>
     <td>{{$country->country}}</td>
+    <td>{{sizeOf($country->tokens)}}</td>
     {{-- <td>
         @can('edit_coupons')
         <a href="{{route('country.manager.edit',$country->id)}}"><i class="md-icon material-icons">&#xE254;</i></a>
