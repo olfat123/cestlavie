@@ -13,6 +13,6 @@ class ManualMessage extends Model
 
     public function country()
     {
-        return $this->belongsTo(Country::class , 'country_id');
+        return $this->belongsTo(Country::class , 'country_id')->where('country_id', '!=', 0);
     }
 }
