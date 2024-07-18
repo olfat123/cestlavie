@@ -41,8 +41,13 @@ class SendWeeklyMessage implements ShouldQueue
         $expo = Expo::driver('file');
         $channel = 'weekly-message';
         foreach($countries as $country){
-            $message = WeeklyMessage::query()->where('country_id',$country)->orWhere('country_id',0)->whereNull('sent_at')->first();
-            if($message){
+            $message = WeeklyMessage::query()
+            ->where(function ($query) use ($country) {
+                $query->where('country_id', $country)
+                      ->orWhere('country_id', 1);
+            })
+            ->whereNull('sent_at')
+            ->first();            if($message){
                 $currentDayName = Carbon::now()->format('l');
                 $currentHour = Carbon::now()->format('H');
                 if($message->day_to_send == $currentDayName 

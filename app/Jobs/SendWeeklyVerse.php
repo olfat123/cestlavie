@@ -40,7 +40,13 @@ class SendWeeklyVerse implements ShouldQueue
         $expo = Expo::driver('file');
         $channel = 'weekly-verse';
         foreach($countries as $country){
-            $verse = WeeklyVerse::query()->where('country_id',$country)->orWhere('country_id',0)->whereNull('sent_at')->first();
+            $verse = WeeklyVerse::query()
+                ->where(function ($query) use ($country) {
+                    $query->where('country_id', $country)
+                        ->orWhere('country_id', 1);
+                })
+                ->whereNull('sent_at')
+                ->first();
             if($verse){
                 $currentDayName = Carbon::now()->format('l');
                 $currentHour = Carbon::now()->format('H');
