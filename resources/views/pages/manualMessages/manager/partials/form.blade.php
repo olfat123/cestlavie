@@ -28,7 +28,7 @@
                             Country
                         </label>
                         <select id="country" name="country_id" data-md-selectize data-md-selectize-bottom class="text-capitalize">
-                            <option class="text-capitalize" value="0">All Countries</option>
+                            {{-- <option class="text-capitalize" value="0">All Countries</option> --}}
                             @foreach($countries as $country)
                                 <option class="text-capitalize" data-id="{{$country->id}}"
                                         @if(isset($message) && $message->country_id == $country->id) selected

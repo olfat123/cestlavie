@@ -11,8 +11,8 @@ class ManualMessage extends Model
 
     protected $guarded = ['id'];
 
-    // public function country()
-    // {
-    //     return $this->belongsTo(Country::class , 'country_id')->where('country_id', '!=', 0);
-    // }
+    public function country()
+    {
+        return $this->belongsTo(Country::class , 'country_id');
+    }
 }

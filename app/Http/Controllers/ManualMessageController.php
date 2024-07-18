@@ -64,7 +64,7 @@ class ManualMessageController extends Controller
         $message = ManualMessage::create($request->except('cover'));
         $expo = Expo::driver('file');
         $channel = 'news-letter';
-        if($message->country_id == 0){
+        if($message->country_id == 1){
             $tokens = Token::query()->pluck('token')->toArray();
         }else{
             $tokens = Token::where('country_id',$message->country_id)->pluck('token')->toArray();
