@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use ExpoSDK\Expo;
+use Carbon\Carbon;
 use App\Models\Token;
 use App\Models\Country;
 use ExpoSDK\ExpoMessage;
@@ -64,10 +65,12 @@ class ManualMessageController extends Controller
         $message = ManualMessage::create($request->except('cover'));
         $expo = Expo::driver('file');
         $channel = 'news-letter';
+        $date = Carbon::createFromFormat('d-m-Y', '02-07-2024');
+
         if($message->country_id == 1){
-            $tokens = Token::query()->pluck('token')->toArray();
+            $tokens = Token::query()->where('created_at','>',$date)->pluck('token')->toArray();
         }else{
-            $tokens = Token::where('country_id',$message->country_id)->pluck('token')->toArray();
+            $tokens = Token::where('country_id',$message->country_id)->where('created_at','>',$date)->pluck('token')->toArray();
         }        
         if($tokens){
             //$expo->subscribe($channel, $tokens);
