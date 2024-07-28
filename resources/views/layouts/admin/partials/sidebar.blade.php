@@ -46,7 +46,7 @@
                 </li>
             @endif 
             
-            @if($authUser->can('view_dashboard'))             
+            @if($authUser->can('view_manual'))             
                 <li class="@if(request()->is('*manual-messages*')) current_section @endif" >
                     <a href="{{route('manualMessage.manager.index')}}">
                         <span class="menu_icon"><i class="material-icons">security</i></span>
