@@ -1,7 +1,7 @@
 <tr>
     <td>{{$country->country}}</td>
     <td>{{$country->country == 'All Countries'? $tokens_count:sizeOf($country->tokens)}}</td>
-    <td>{{$country->$count_android}}</td>
+    <td>{{$country->count_android}}</td>
     <td>{{$country->count_ios}}</td>
     {{-- <td>
         @can('edit_coupons')
