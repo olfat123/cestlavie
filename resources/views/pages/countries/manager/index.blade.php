@@ -42,6 +42,8 @@
                         <tr>
                             <th>Country Name</th>
                             <th>Count</th>
+                            <th>Android</th>
+                            <th>IOS</th>
                             {{-- <th class="uk-width-3-10 uk-text-center">Actions</th> --}}
                         </tr>
                         </thead>

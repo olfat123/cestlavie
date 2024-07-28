@@ -42,7 +42,8 @@ class TokenController extends Controller
     {
         $request->validate([
             'token' => 'required',
-            'country'=> 'required'
+            'country'=> 'required',
+            'os' => 'sometimes|required'
         ]);
         $data = $request->except('country');
         $country = Country::firstWhere('country',$request->country);

@@ -14,6 +14,14 @@ class Country extends Model
         return $this->hasMany(Token::class , 'country_id');
     }
 
+    public function count_android(){
+       return $this->tokens->where('os','android')->count();
+    }
+
+    public function count_ios(){
+        return $this->tokens->where('os','ios')->count();
+    }
+
     public function wMessages(){
         return $this->hasMany(WeeklyMessage::class , 'country_id');
     }
