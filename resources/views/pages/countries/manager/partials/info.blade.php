@@ -1,8 +1,8 @@
 <tr>
     <td>{{$country->country}}</td>
     <td>{{$country->country == 'All Countries'? $tokens_count:sizeOf($country->tokens)}}</td>
-    <td>{{$country->count_android}}</td>
-    <td>{{$country->count_ios}}</td>
+    <td>{{$country->count_android?:0}}</td>
+    <td>{{$country->count_ios?:0}}</td>
     {{-- <td>
         @can('edit_coupons')
         <a href="{{route('country.manager.edit',$country->id)}}"><i class="md-icon material-icons">&#xE254;</i></a>
