@@ -15,11 +15,11 @@ class Country extends Model
     }
 
     public function count_android(){
-       return $this->tokens->where('os','android')->count();
+       return $this->tokens()->where('os','android')->count();
     }
 
     public function count_ios(){
-        return $this->tokens->where('os','ios')->count();
+        return $this->tokens()->where('os','ios')->count();
     }
 
     public function wMessages(){
