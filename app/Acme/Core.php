@@ -135,8 +135,8 @@ class Core
     public function viewShares()
     {
         view()->share('helper', $this);
-        view()->share('avatarDef', asset(config('team.sysconfig.default-avatar')));
-        view()->share('adminAvatarDef', asset(config('team.sysconfig.default-admin-avatar')));
+        view()->share('avatarDef', asset(config('ilamp.sysconfig.default-avatar')));
+        view()->share('adminAvatarDef', asset(config('ilamp.sysconfig.default-admin-avatar')));
     }
 
     /**
