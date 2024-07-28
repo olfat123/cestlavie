@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Token;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Presenters\CommonPresenter;
@@ -28,6 +29,7 @@ class CountryController extends Controller
         $countries = app(CommonPresenter::class)->paginate($countries->get());
         return view('pages.countries.manager.index', [
             'countries' => $countries,
+            'tokens_count' => Token::count(),
             'breadcrumb' => $this->breadcrumb([], 'Countries')
         ]);
     }
