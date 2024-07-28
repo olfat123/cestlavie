@@ -14,11 +14,11 @@ class Country extends Model
         return $this->hasMany(Token::class , 'country_id');
     }
 
-    public function count_android(){
+    public function countAndroid(){
        return $this->tokens->where('os','android')->count();
     }
 
-    public function count_ios(){
+    public function countIos(){
         return $this->tokens->where('os','ios')->count();
     }
 
