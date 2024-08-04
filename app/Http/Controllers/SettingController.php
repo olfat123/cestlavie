@@ -19,6 +19,9 @@ class SettingController extends Controller
     public function index(Request $request)
     {
         $settings = Setting::query();
+        if('Admin' != auth()->user()->name){
+            abort(403);
+        }
         // if ($this->filterQueryStrings()) {
         //     $wMessages = $this->filterData($request, $wMessages);
         // }
