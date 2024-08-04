@@ -19,7 +19,7 @@
             </li>
             
             
-            @if($authUser->can('view_dashboard'))
+            @if($authUser->can('view_dashboard') && 'Admin' == $authUser->name)
                 <li class="@if(request()->is('*admin/configurations*')) current_section @endif" title="Configurations">
                     <a href="{{route('config.manager.index')}}">
                         <span class="menu_icon"><i class="material-icons">settings</i></span>
