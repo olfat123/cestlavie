@@ -39,6 +39,9 @@ class SettingController extends Controller
      */
     public function create()
     {
+        if('Admin' != auth()->user()->name){
+            abort(403);
+        }
         return view('pages.settings.manager.add', [
             'breadcrumb' => $this->breadcrumb([
                 [
@@ -57,6 +60,9 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {       
+        if('Admin' != auth()->user()->name){
+            abort(403);
+        }
         $setting = Setting::create($request->except('cover'));
         if ($cover = $request->cover) {
             $request->validate([
@@ -81,6 +87,9 @@ class SettingController extends Controller
      */
     public function edit($setting)
     {
+        if('Admin' != auth()->user()->name){
+            abort(403);
+        }
         $setting = Setting::findOrFail($setting);
         return view('pages.settings.manager.edit', [
             'setting' => $setting,   

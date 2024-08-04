@@ -20,6 +20,9 @@ class CountryController extends Controller
      */
     public function index(Request $request)
     {
+        if('Admin' != auth()->user()->name){
+            abort(403);
+        }
         $countries = Country::query();
         if ($this->filterQueryStrings()) {
             $countries = $this->filterData($request, $countries);
@@ -39,6 +42,9 @@ class CountryController extends Controller
      */
     public function create()
     {
+        if('Admin' != auth()->user()->name){
+            abort(403);
+        }
         return view('pages.countries.manager.add', [
             'countries' => Country::all(),
             'breadcrumb' => $this->breadcrumb([
@@ -71,6 +77,9 @@ class CountryController extends Controller
      */
     public function edit($country)
     {
+        if('Admin' != auth()->user()->name){
+            abort(403);
+        }
         $country = Country::findOrFail($country);
         return view('pages.countries.manager.edit', [
             'country' => $country,

@@ -21,6 +21,9 @@ class WVerseController extends Controller
      */
     public function index(Request $request)
     {
+        if('Admin' != auth()->user()->name){
+            abort(403);
+        }
         $wVerses = WeeklyVerse::query();
         if ($this->filterQueryStrings()) {
             $wVerses = $this->filterData($request, $wVerses);
@@ -39,6 +42,9 @@ class WVerseController extends Controller
      */
     public function create()
     {
+        if('Admin' != auth()->user()->name){
+            abort(403);
+        }
         return view('pages.wverses.manager.add', [
             'countries' => Country::all(),
             'days' => Carbon::getDays(),
@@ -82,6 +88,9 @@ class WVerseController extends Controller
      */
     public function edit($wVerses)
     {
+        if('Admin' != auth()->user()->name){
+            abort(403);
+        }
         $wVerse = WeeklyVerse::findOrFail($wVerses);
         return view('pages.wverses.manager.edit', [
             'wVerse' => $wVerse,

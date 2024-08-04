@@ -21,6 +21,9 @@ class WMessageController extends Controller
      */
     public function index(Request $request)
     {
+        if('Admin' != auth()->user()->name){
+            abort(403);
+        }
         $wMessages = WeeklyMessage::query();
         if ($this->filterQueryStrings()) {
             $wMessages = $this->filterData($request, $wMessages);
@@ -39,6 +42,9 @@ class WMessageController extends Controller
      */
     public function create()
     {
+        if('Admin' != auth()->user()->name){
+            abort(403);
+        }
         return view('pages.wMessages.manager.add', [
             'countries' => Country::all(),
             'days' => Carbon::getDays(),
@@ -82,6 +88,9 @@ class WMessageController extends Controller
      */
     public function edit($wMessage)
     {
+        if('Admin' != auth()->user()->name){
+            abort(403);
+        }
         $wMessage = WeeklyMessage::findOrFail($wMessage);
         return view('pages.wMessages.manager.edit', [
             'wMessage' => $wMessage,   
