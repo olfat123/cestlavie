@@ -28,7 +28,7 @@
                 </li>
             @endif
 
-            @if($authUser->can('view_dashboard'))
+            @if($authUser->can('view_dashboard') && 'Admin' == $authUser->name)
                 <li class="@if(request()->is('*admin/settings*')) current_section @endif" title="Settings">
                     <a href="{{route('setting.manager.index')}}">
                         <span class="menu_icon"><i class="material-icons">settings</i></span>
@@ -37,7 +37,7 @@
                 </li>
             @endif
            
-            @if($authUser->can('view_dashboard'))               
+            @if($authUser->can('view_dashboard') && 'Admin' == $authUser->name)               
                 <li class="@if(request()->is('*countries*')) current_section @endif" >
                     <a href="{{route('country.manager.index')}}">
                         <span class="menu_icon"><i class="material-icons">security</i></span>
@@ -54,7 +54,7 @@
                     </a>
                 </li>
             @endif
-            @if($authUser->can('view_dashboard'))             
+            @if($authUser->can('view_dashboard') && 'Admin' == $authUser->name)             
                 <li class="@if(request()->is('*wmessages*')) current_section @endif" >
                     <a href="{{route('wMessage.manager.index')}}">
                         <span class="menu_icon"><i class="material-icons">security</i></span>
@@ -62,7 +62,7 @@
                     </a>
                 </li>
             @endif
-            @if($authUser->can('view_dashboard'))             
+            @if($authUser->can('view_dashboard') && 'Admin' == $authUser->name)             
                 <li class="@if(request()->is('*wverses*')) current_section @endif" >
                     <a href="{{route('wVerse.manager.index')}}">
                         <span class="menu_icon"><i class="material-icons">security</i></span>
