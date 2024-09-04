@@ -54,7 +54,7 @@
                     </a>
                 </li>
             @endif
-            @if($authUser->can('view_dashboard') && 'Admin' == $authUser->name)             
+            @if($authUser->can('view_dashboard') )             
                 <li class="@if(request()->is('*wmessages*')) current_section @endif" >
                     <a href="{{route('wMessage.manager.index')}}">
                         <span class="menu_icon"><i class="material-icons">security</i></span>
@@ -62,7 +62,7 @@
                     </a>
                 </li>
             @endif
-            @if($authUser->can('view_dashboard') && 'Admin' == $authUser->name)             
+            @if($authUser->can('view_dashboard') )             
                 <li class="@if(request()->is('*wverses*')) current_section @endif" >
                     <a href="{{route('wVerse.manager.index')}}">
                         <span class="menu_icon"><i class="material-icons">security</i></span>
