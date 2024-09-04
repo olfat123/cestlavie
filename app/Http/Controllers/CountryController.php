@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Token;
 use App\Models\Country;
 use Illuminate\Http\Request;
-use App\Presenters\CommonPresenter;
+use App\Presenters\CountryPresenter;
 use App\Http\Controllers\Traits\Filtration;
 
 class CountryController extends Controller
@@ -23,13 +23,13 @@ class CountryController extends Controller
         if('Admin' != auth()->user()->name){
             abort(403);
         }
-        $countries = Country::query()->orderBy('id', 'asc');
+        $countries = Country::query();
         if ($this->filterQueryStrings()) {
             $countries = $this->filterData($request, $countries);
         }
         //dd($countries->get());
 
-        $countries = app(CommonPresenter::class)->paginate($countries->get());
+        $countries = app(CountryPresenter::class)->paginate($countries->get());
         return view('pages.countries.manager.index', [
             'countries' => $countries,
             'tokens_count' => Token::count(),
