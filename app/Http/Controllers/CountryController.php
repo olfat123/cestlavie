@@ -23,7 +23,7 @@ class CountryController extends Controller
         if('Admin' != auth()->user()->name){
             abort(403);
         }
-        $countries = Country::query();
+        $countries = Country::query()->orderBy('id', 'asc');
         if ($this->filterQueryStrings()) {
             $countries = $this->filterData($request, $countries);
         }
